@@ -112,7 +112,7 @@ def main():
 			fifteensbot.send_message(message.from_user.id, "You move chip \"%d\"" % chip, reply_markup=showgamefield(gamefield))
 	
 	try:
-		fifteensbot.polling(none_stop=True, interval=1)
+		fifteensbot.polling(none_stop=True, interval=0)
 	except Exception as ex:
 		time.sleep(5)
 		print("Internet error!")
