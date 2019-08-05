@@ -108,7 +108,7 @@ def main():
 		else:
 			chiprow, chipcol = chiprowcol(chip, gamefield)
 			gamefield = trytomovechip(chiprow, chipcol, gamefield)
-			fifteensbot.send_message(message.from_user.id, "", reply_markup=showgamefield(gamefield))
+			fifteensbot.send_message(message.from_user.id, "You move chip %d" % chip, reply_markup=showgamefield(gamefield))
 	
 	try:
 		fifteensbot.polling(none_stop=True, interval=1)
