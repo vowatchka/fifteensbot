@@ -15,6 +15,7 @@ __date__      = "2019-08-05"
 # import packages and modules
 import telebot
 import os
+import time
 from random import randint
 from copy import deepcopy
 	
@@ -108,6 +109,13 @@ def main():
 	fifteensbot = telebot.TeleBot(TG_TOKEN)
 	# game field
 	gamefield = []
-		
+	
+	try:
+		fifteensbot.polling(none_stop=True, interval=1)
+	except Exception as ex:
+		time.sleep(5)
+		print("Internet error!")
+		print(ex)
+			
 if __name__ == "__main__":
 	main()
