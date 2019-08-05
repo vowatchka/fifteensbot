@@ -79,7 +79,7 @@ def showgamefield(gamefield):
 	
 	# create keyboard buttons
 	for idx,fieldrow in enumerate(gamefield):
-		rowbuttons = list(map(lambda chip : telebot.types.KeyboardButton(text=str(chip)), fieldrow))
+		rowbuttons = list(map(lambda chip : telebot.types.KeyboardButton(text=str(chip) if chip != None else ""), fieldrow))
 		keyboard.add(*rowbuttons)
 		
 	return keyboard
@@ -96,7 +96,8 @@ def main():
 	def start(message):
 		nonlocal gamefield
 		gamefield = mixchips()
-		fifteensbot.send_message(message.from_user.id, "Start game", reply_markup=showgamefield(gamefield))
+		fifteensbot.send_message(message.from_user.id, "Let's start!", reply_markup=showgamefield(gamefield))
+		fifteensbot.send_message(message.from_user.id, "Select and move chip please...")
 	
 	@fifteensbot.message_handler(content_types=["text"])
 	def getuserchip(message):
@@ -104,11 +105,11 @@ def main():
 		try:
 			chip = int(message.text)
 		except:
-			fifteensbot.send_message(message.from_user.id, "Unknown chip", reply_markup=showgamefield(gamefield))
+			fifteensbot.send_message(message.from_user.id, "Select and move chip please...", reply_markup=showgamefield(gamefield))
 		else:
 			chiprow, chipcol = chiprowcol(chip, gamefield)
 			gamefield = trytomovechip(chiprow, chipcol, gamefield)
-			fifteensbot.send_message(message.from_user.id, "You move chip %d" % chip, reply_markup=showgamefield(gamefield))
+			fifteensbot.send_message(message.from_user.id, "You move chip \"%d\"" % chip, reply_markup=showgamefield(gamefield))
 	
 	try:
 		fifteensbot.polling(none_stop=True, interval=1)
