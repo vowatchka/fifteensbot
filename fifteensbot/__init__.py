@@ -91,7 +91,13 @@ def main():
 	fifteensbot = telebot.TeleBot(TG_TOKEN)
 	# game field
 	gamefield = []
-
+	
+	@fifteensbot.message_handler(commands=["start"])
+	def start(message):
+		nonlocal gamefield
+		gamefield = mixchips()
+		fifteensbot.send_message(message.from_user.id, "Start game", reply_markup=showgamefield(gamefield))
+	
 	@fifteensbot.message_handler(content_types=["text"])
 	def getuserchip(message):
 		nonlocal gamefield
@@ -103,13 +109,6 @@ def main():
 			chiprow, chipcol = chiprowcol(chip, gamefield)
 			gamefield = trytomovechip(chiprow, chipcol, gamefield)
 			fifteensbot.send_message(message.from_user.id, "", reply_markup=showgamefield(gamefield))
-		
-	@fifteensbot.message_handler(commands=["start"])
-	def start(message):
-		# nonlocal gamefield
-		# gamefield = mixchips()
-		# fifteensbot.send_message(message.from_user.id, "Start game", reply_markup=showgamefield(gamefield))
-		fifteensbot.send_message(message.from_user.id, "Hi",)
 	
 	try:
 		fifteensbot.polling(none_stop=True, interval=1)
