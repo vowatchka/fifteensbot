@@ -99,9 +99,10 @@ def main():
 		
 	@fifteensbot.message_handler(commands=["start"])
 	def start(message):
-		nonlocal gamefield
-		gamefield = mixchips()
-		fifteensbot.send_message(message.from_user.id, "Start game", reply_markup=showgamefield(gamefield))
+		# nonlocal gamefield
+		# gamefield = mixchips()
+		# fifteensbot.send_message(message.from_user.id, "Start game", reply_markup=showgamefield(gamefield))
+		fifteensbot.send_message(message.from_user.id, "Hi",)
 			
 	# get token
 	TG_TOKEN = os.environ["TOKEN"]
@@ -116,6 +117,5 @@ def main():
 		time.sleep(5)
 		print("Internet error!")
 		print(ex)
-			
-if __name__ == "__main__":
-	main()
+
+main()
