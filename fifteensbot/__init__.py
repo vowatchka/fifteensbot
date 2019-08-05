@@ -75,7 +75,7 @@ def trytomovechip(row, col, gamefield):
 		
 def showgamefield(gamefield):
 	# create keyboard
-	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, row_width=4)
+	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False, row_width=4, selective=True)
 	
 	# create keyboard buttons
 	for idx,fieldrow in enumerate(gamefield):
