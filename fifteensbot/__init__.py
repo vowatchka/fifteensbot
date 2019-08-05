@@ -85,7 +85,14 @@ def showgamefield(gamefield):
 	return keyboard
 	
 def main():
-	@fifteensbot.message_handler(content_types=["text"]):
+	# get token
+	TG_TOKEN = os.environ["TOKEN"]
+	# bot
+	fifteensbot = telebot.TeleBot(TG_TOKEN)
+	# game field
+	gamefield = []
+
+	@fifteensbot.message_handler(content_types=["text"])
 	def getuserchip(message):
 		nonlocal gamefield
 		try:
@@ -103,13 +110,6 @@ def main():
 		# gamefield = mixchips()
 		# fifteensbot.send_message(message.from_user.id, "Start game", reply_markup=showgamefield(gamefield))
 		fifteensbot.send_message(message.from_user.id, "Hi",)
-			
-	# get token
-	TG_TOKEN = os.environ["TOKEN"]
-	# bot
-	fifteensbot = telebot.TeleBot(TG_TOKEN)
-	# game field
-	gamefield = []
 	
 	try:
 		fifteensbot.polling(none_stop=True, interval=1)
@@ -118,4 +118,5 @@ def main():
 		print("Internet error!")
 		print(ex)
 
-main()
+if __name__ == "__main__":
+	main()
