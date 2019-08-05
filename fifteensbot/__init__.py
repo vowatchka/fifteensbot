@@ -79,7 +79,7 @@ def showgamefield(gamefield):
 	
 	# create keyboard buttons
 	for idx,fieldrow in enumerate(gamefield):
-		rowbuttons = list(map(lambda chip : telebot.types.KeyboardButton(text=str(chip) if chip != None else ""), fieldrow))
+		rowbuttons = list(map(lambda chip : telebot.types.KeyboardButton(text=str(chip) if chip != None else " "), fieldrow))
 		keyboard.add(*rowbuttons)
 		
 	return keyboard
